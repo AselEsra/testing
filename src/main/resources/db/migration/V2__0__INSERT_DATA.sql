@@ -1,0 +1,1 @@
+INSERT INTO drinks(name_, is_sugar, is_hot, price) VALUES('coffee', false, true, 3.00);

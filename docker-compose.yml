@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  cafe-mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=cafe
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3010:3306"
+  cafe-api:
+    image: cafe-api
+    ports:
+      - "8010:8090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://cafe-mysql:3310/cafe
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    build:
+      context: ./
+      dockerfile: DockerFile
+    depends_on:
+      - cafe-mysql

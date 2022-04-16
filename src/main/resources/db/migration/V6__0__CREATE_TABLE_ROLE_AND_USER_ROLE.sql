@@ -1,0 +1,20 @@
+DROP TABLE IF EXISTS roles;
+
+CREATE TABLE roles(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  role_name VARCHAR(50),
+  description VARCHAR(255),
+  PRIMARY KEY(id)
+);
+
+
+DROP TABLE IF EXISTS user_roles;
+
+CREATE TABLE user_roles(
+  id BIGINT NOT NULL,
+  role_id BIGINT NOT NULL,
+  PRIMARY KEY(id,role_id),
+  KEY FK_USER_ROLE (role_id),
+  CONSTRAINT FK_USER FOREIGN KEY (id) REFERENCES users (id),
+  CONSTRAINT FK_USER_ROLE FOREIGN KEY (role_id) REFERENCES roles(id)
+);
